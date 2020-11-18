@@ -50,9 +50,7 @@ GitHub - репозиторий
 
 ## Сборка и запуск
 
-### Создание бота
-
-Необходимо создать бота с помощью [BotFather](https://t.me/botfather) и сохранить его имя и токен
+Перед сборкой необходимо создать бота с помощью [BotFather](https://t.me/botfather) и сохранить его имя и токен (они понадобятся для запуска)
 
 ```
 git clone https://github.com/taksebe-official/mentalCalculation
