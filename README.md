@@ -56,17 +56,17 @@ GitHub - репозиторий
 
 ### Развертывание на heroku
 
-Проект писался для релиза на [heroku](https://www.heroku.com/) и содержит файл Procfile, специфический именно для него
+Проект писался для релиза на [heroku](https://www.heroku.com/) и содержит файл Procfile, специфический именно для этой площадки
 
 Порядок:
-+ «mvn clean install»
++ `mvn clean install`
 + зарегистрироваться на heroku
 + перейти в консоль
-+ «heroku login» и следовать инструкции
-+ «heroku create <имя приложения>»
-+ «git push heroku master»
-+ добавить имя бота в переменные окружения «heroku config:set BOT_NAME=<имя бота>»
-+ добавить токен бота в переменные окружения «heroku config:set BOT_TOKEN=<токен бота>»
++ `heroku login` и следовать инструкции
++ `heroku create <имя приложения>`
++ `git push heroku master`
++ добавить имя бота в переменные окружения `heroku config:set BOT_NAME=<имя бота>`
++ добавить токен бота в переменные окружения `heroku config:set BOT_TOKEN=<токен бота>`
 + при необходимости - в интерфейсе управления приложением в личном кабинете на [heroku](https://www.heroku.com/) переключить деплой на GitHub-репозиторий
 
 ## Отдельное спасибо
