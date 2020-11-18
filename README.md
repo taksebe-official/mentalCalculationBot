@@ -49,6 +49,11 @@ GitHub - репозиторий
 Полный список зависимостей и используемые версии компонентов можно найти в pom.xml
 
 ## Сборка и запуск
+
+### Создание бота
+
+Необходимо создать бота с помощью [BotFather](https://t.me/botfather) и сохранить его имя и токен
+
 ```
 git clone https://github.com/taksebe-official/mentalCalculation
 cd mentalCalculation
@@ -65,13 +70,7 @@ export BOT_TOKEN=<токен бота>
 java -Xmx300m -Xss512k -XX:CICompilerCount=2 -Dfile.encoding=UTF-8 -cp ./target/classes:./target/dependency/* ru.taksebe.telegram.mentalCalculation.MentalCalculationApplication
 ```
 
-## Порядок развёртывания
-
-### Создание бота
-
-Необходимо создать бота с помощью [BotFather](https://t.me/botfather) и сохранить его имя и токен
-
-### Развертывание на heroku
+## Порядок развёртывания на heroku
 
 Проект писался для релиза на [heroku](https://www.heroku.com/) и содержит файл Procfile, специфический именно для этой площадки
 
@@ -82,7 +81,7 @@ mvn clean install
 heroku login
 heroku create <имя приложения>
 
-//установить количество контейнеров (dynos) для типа процесса worker (устанавливается в Procfile)
+//установить количество контейнеров (dynos) для типа процесса worker (тип устанавливается в Procfile)
 heroku ps:scale worker=1
 git push heroku master
 
