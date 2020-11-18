@@ -53,12 +53,13 @@ GitHub - репозиторий
 git clone https://github.com/taksebe-official/mentalCalculation
 cd mentalCalculation
 mvn clean install
-//для Windows
+
+//далее для Windows
 set BOT_NAME=<имя бота>
 set BOT_TOKEN=<токен бота>
 java -Xmx300m -Xss512k -XX:CICompilerCount=2 -Dfile.encoding=UTF-8 -cp ./target/classes;./target/dependency/* ru.taksebe.telegram.mentalCalculation.MentalCalculationApplication
 
-//для Linux
+//далее для Linux
 export BOT_NAME=<имя бота>
 export BOT_TOKEN=<токен бота>
 java -Xmx300m -Xss512k -XX:CICompilerCount=2 -Dfile.encoding=UTF-8 -cp ./target/classes:./target/dependency/* ru.taksebe.telegram.mentalCalculation.MentalCalculationApplication
@@ -74,17 +75,23 @@ java -Xmx300m -Xss512k -XX:CICompilerCount=2 -Dfile.encoding=UTF-8 -cp ./target/
 
 Проект писался для релиза на [heroku](https://www.heroku.com/) и содержит файл Procfile, специфический именно для этой площадки
 
-Порядок:
-+ зарегистрироваться на heroku
-+ перейти в консоль
-+ `mvn clean install`
-+ `heroku login` и следовать инструкции
-+ `heroku create <имя приложения>`
-+ `heroku ps:scale worker=1` - установить количество контейнеров (dynos) для типа процесса worker (устанавливается в Procfile)
-+ `git push heroku master`
-+ `heroku config:set BOT_NAME=<имя бота>` - добавить имя бота (получен от BotFather) в переменные окружения
-+ `heroku config:set BOT_TOKEN=<токен бота>` - добавить токен бота (получен от BotFather) в переменные окружения
-+ при необходимости - в интерфейсе управления приложением в личном кабинете на [heroku](https://www.heroku.com/) переключить деплой на GitHub-репозиторий (по запросу или автоматически)
+```
+mvn clean install
+
+//предварительно зарегистрироваться на heroku
+heroku login
+heroku create <имя приложения>
+
+//установить количество контейнеров (dynos) для типа процесса worker (устанавливается в Procfile)
+heroku ps:scale worker=1
+git push heroku master
+
+//добавить имя и токен бота (получены от BotFather) в переменные окружения
+heroku config:set BOT_NAME=<имя бота>
++ `heroku config:set BOT_TOKEN=<токен бота>
+```
+
+При необходимости в интерфейсе управления приложением в личном кабинете на [heroku](https://www.heroku.com/) можно переключить деплой на GitHub-репозиторий (по запросу или автоматически)
 
 ## Отдельное спасибо
 
