@@ -61,8 +61,8 @@ public class Settings {
             throw new IllegalArgumentException("Сообщение не является текстом");
         }
         text = text.replaceAll("-", "")//избавляемся от отрицательных чисел (умники найдутся)
-                .replaceAll(", ", ",")//меняем разделитель-пробел на запятую (и такие найдутся)
-                .replaceAll(" ", ",");//меняем ошибочный разделитель "запятая+пробел" на запятую
+                .replaceAll(", ", ",")//меняем ошибочный разделитель "запятая+пробел" на запятую
+                .replaceAll(" ", ",");//меняем разделитель-пробел на запятую
         String[] parameters = text.split(",");
         if (parameters.length != 3) {
             throw new IllegalArgumentException(String.format("Не удалось разбить сообщение \"%s\" на 3 составляющих",
@@ -79,6 +79,9 @@ public class Settings {
         return new Settings(1, 15, 1);
     }
 
+    /**
+     * Валидация настроек
+     */
     private void validateSettings(int min, int max, int listCount) {
         if (min == 0 || max == 0 || listCount == 0) {
             throw new IllegalSettingsException("\uD83D\uDCA9 Ни один из параметров не может равняться 0");

@@ -40,7 +40,7 @@ GitHub - репозиторий
 
 [Apache POI](https://poi.apache.org/) - создание документа Word
 
-[Lombok](https://projectlombok.org/) - упрощение кода, замена стандартных java-методов аннотациями библиотеки
+[Lombok](https://projectlombok.org/) - упрощение кода, замена стандартных java-методов аннотациями
 
 [Apache Log4j](https://logging.apache.org/log4j/) - логирование
 
@@ -64,10 +64,11 @@ GitHub - репозиторий
 + перейти в консоль
 + `heroku login` и следовать инструкции
 + `heroku create <имя приложения>`
++ установить количество контейнеров (dynos) для типа процесса worker (устанавливается в Procfile) 'heroku ps:scale worker=1'
 + `git push heroku master`
-+ добавить имя бота в переменные окружения `heroku config:set BOT_NAME=<имя бота>`
-+ добавить токен бота в переменные окружения `heroku config:set BOT_TOKEN=<токен бота>`
-+ при необходимости - в интерфейсе управления приложением в личном кабинете на [heroku](https://www.heroku.com/) переключить деплой на GitHub-репозиторий
++ добавить имя бота (получен от BotFather) в переменные окружения `heroku config:set BOT_NAME=<имя бота>`
++ добавить токен бота (получен от BotFather) в переменные окружения `heroku config:set BOT_TOKEN=<токен бота>`
++ при необходимости - в интерфейсе управления приложением в личном кабинете на [heroku](https://www.heroku.com/) переключить деплой на GitHub-репозиторий (по запросу или автоматически)
 
 ## Отдельное спасибо
 
