@@ -64,10 +64,10 @@ GitHub - репозиторий
 + перейти в консоль
 + `heroku login` и следовать инструкции
 + `heroku create <имя приложения>`
-+ установить количество контейнеров (dynos) для типа процесса worker (устанавливается в Procfile) 'heroku ps:scale worker=1'
++ `heroku ps:scale worker=1` - установить количество контейнеров (dynos) для типа процесса worker (устанавливается в Procfile)
 + `git push heroku master`
-+ добавить имя бота (получен от BotFather) в переменные окружения `heroku config:set BOT_NAME=<имя бота>`
-+ добавить токен бота (получен от BotFather) в переменные окружения `heroku config:set BOT_TOKEN=<токен бота>`
++ `heroku config:set BOT_NAME=<имя бота>` - добавить имя бота (получен от BotFather) в переменные окружения
++ `heroku config:set BOT_TOKEN=<токен бота>` - добавить токен бота (получен от BotFather) в переменные окружения
 + при необходимости - в интерфейсе управления приложением в личном кабинете на [heroku](https://www.heroku.com/) переключить деплой на GitHub-репозиторий (по запросу или автоматически)
 
 ## Отдельное спасибо
