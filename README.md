@@ -32,8 +32,6 @@ Git - управление версиями
 
 GitHub - репозиторий
 
-[Heroku](https://www.heroku.com/) - деплой, хостинг
-
 [Telegram Bots](https://core.telegram.org/bots) - взаимодействие с Telegram
 
 [Apache Maven](https://maven.apache.org/) - сборка, управление зависимостями
@@ -46,7 +44,25 @@ GitHub - репозиторий
 
 [JUnit 5](https://junit.org/junit5/) - тестирование
 
+[Heroku](https://www.heroku.com/) - деплой, хостинг
+
 Полный список зависимостей и используемые версии компонентов можно найти в pom.xml
+
+## Сборка и запуск
+```
+git clone https://github.com/taksebe-official/mentalCalculation
+cd mentalCalculation
+mvn clean install
+//для Windows
+set BOT_NAME=<имя бота>
+set BOT_TOKEN=<токен бота>
+java -Xmx300m -Xss512k -XX:CICompilerCount=2 -Dfile.encoding=UTF-8 -cp ./target/classes;./target/dependency/* ru.taksebe.telegram.mentalCalculation.MentalCalculationApplication
+
+//для Linux
+export BOT_NAME=<имя бота>
+export BOT_TOKEN=<токен бота>
+java -Xmx300m -Xss512k -XX:CICompilerCount=2 -Dfile.encoding=UTF-8 -cp ./target/classes:./target/dependency/* ru.taksebe.telegram.mentalCalculation.MentalCalculationApplication
+```
 
 ## Порядок развёртывания
 
@@ -59,9 +75,9 @@ GitHub - репозиторий
 Проект писался для релиза на [heroku](https://www.heroku.com/) и содержит файл Procfile, специфический именно для этой площадки
 
 Порядок:
-+ `mvn clean install`
 + зарегистрироваться на heroku
 + перейти в консоль
++ `mvn clean install`
 + `heroku login` и следовать инструкции
 + `heroku create <имя приложения>`
 + `heroku ps:scale worker=1` - установить количество контейнеров (dynos) для типа процесса worker (устанавливается в Procfile)
