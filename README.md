@@ -88,7 +88,7 @@ git push heroku master
 
 //добавить имя и токен бота (получены от BotFather) в переменные окружения
 heroku config:set BOT_NAME=<имя бота>
-+ `heroku config:set BOT_TOKEN=<токен бота>
+heroku config:set BOT_TOKEN=<токен бота>
 ```
 
 При необходимости в интерфейсе управления приложением в личном кабинете на [heroku](https://www.heroku.com/) можно переключить деплой на GitHub-репозиторий (по запросу или автоматически)
