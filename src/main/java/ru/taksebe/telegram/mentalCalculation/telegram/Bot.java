@@ -30,7 +30,7 @@ public final class Bot extends TelegramLongPollingCommandBot {
     private final String BOT_TOKEN;
 
     /**
-     * Настройки файла для разных пользователей
+     * Настройки файла для разных пользователей. Ключ - уникальный id чата
      */
     @Getter
     private static Map<Long, Settings> userSettings;
@@ -84,9 +84,10 @@ public final class Bot extends TelegramLongPollingCommandBot {
 
         Settings settings;
         try {
-            logger.info(String.format("Пользователь %s. Пробуем создать объект настроек из сообщения \"%s\"", userLogName,
-                    text));
+            logger.info(String.format("Пользователь %s. Пробуем создать объект настроек из сообщения \"%s\"",
+                    userLogName, text));
             settings = Settings.createSettings(text);
+            //добавляем настройки в мапу, чтобы потом их использовать для этого пользователя при генерации файла
             userSettings.put(chatId, settings);
             logger.info(String.format("Пользователь %s. Объект настроек из сообщения \"%s\" создан и сохранён",
                     userLogName, text));

@@ -8,7 +8,7 @@ import org.telegram.telegrambots.meta.bots.AbsSender;
 import ru.taksebe.telegram.mentalCalculation.enums.OperationEnum;
 
 /**
- * Команда получение файла с заданиями на сложение вычитание
+ * Команда получение файла с заданиями на сложение и вычитание
  */
 public class PlusMinusCommand extends OperationCommand {
     private Logger logger = LoggerFactory.getLogger(PlusMinusCommand.class);
