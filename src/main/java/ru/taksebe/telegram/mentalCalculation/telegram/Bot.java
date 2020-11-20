@@ -87,8 +87,7 @@ public final class Bot extends TelegramLongPollingCommandBot {
             logger.info(String.format("Пользователь %s. Пробуем создать объект настроек из сообщения \"%s\"",
                     userLogName, text));
             settings = Settings.createSettings(text);
-            //добавляем настройки в мапу, чтобы потом их использовать для этого пользователя при генерации файла
-            userSettings.put(chatId, settings);
+            saveUserSettings(chatId, settings);
             logger.info(String.format("Пользователь %s. Объект настроек из сообщения \"%s\" создан и сохранён",
                     userLogName, text));
             setAnswer(chatId, "Настройки обновлены. Вы всегда можете их посмотреть с помощью /settings");
@@ -104,6 +103,18 @@ public final class Bot extends TelegramLongPollingCommandBot {
         } finally {
             logger.info(String.format("Пользователь %s. Завершена обработка сообщения \"%s\", не являющегося командой",
                     userLogName, text));
+        }
+    }
+
+    /**
+     * Добавление настроек пользователя в мапу, чтобы потом их использовать для этого пользователя при генерации файла
+     * Если настройки совпадают с дефолтными, они не сохраняются, чтобы впустую не раздувать мапу
+     * @param chatId id чата
+     * @param settings настройки
+     */
+    private void saveUserSettings(Long chatId, Settings settings) {
+        if (!settings.equals(Settings.getDefaultSettings())) {
+            userSettings.put(chatId, settings);
         }
     }
 

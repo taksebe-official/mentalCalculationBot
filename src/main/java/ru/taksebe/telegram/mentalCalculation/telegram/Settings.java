@@ -75,7 +75,7 @@ public class Settings {
     /**
      * Получение настроек по умолчанию
      */
-    private static Settings getDefaultSettings() {
+    static Settings getDefaultSettings() {
         return new Settings(1, 15, 1);
     }
 
