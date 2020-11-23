@@ -13,7 +13,7 @@ import java.util.List;
 /**
  * Создание стрима файла с заданиями для последующей отправки в Telegram
  */
-public class WordFileProcessorImpl implements WordFileProcessor {
+public class WordFileProcessorImpl {
 
     /**
      * Создание стрима

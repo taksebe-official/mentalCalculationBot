@@ -13,7 +13,6 @@ import ru.taksebe.telegram.mentalCalculation.calculation.PlusMinusService;
 import ru.taksebe.telegram.mentalCalculation.enums.OperationEnum;
 import ru.taksebe.telegram.mentalCalculation.fileProcessor.WordFileProcessorImpl;
 import ru.taksebe.telegram.mentalCalculation.telegram.Bot;
-import ru.taksebe.telegram.mentalCalculation.telegram.nonCommand.Settings;
 
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -55,19 +54,11 @@ abstract class OperationCommand extends BotCommand {
      * @param fileName имя, которое нужно присвоить файлу
      */
     private SendDocument createDocument(Long chatId, List<OperationEnum> operations, String fileName) throws IOException {
-        FileInputStream stream = getResultStream(operations, Bot.getUserSettings(chatId));
+        FileInputStream stream = service.getPlusMinusFile(operations, Bot.getUserSettings(chatId));
         SendDocument document = new SendDocument();
         document.setChatId(chatId.toString());
         document.setDocument(new InputFile(stream, String.format("%s.docx", fileName)));
         return document;
-    }
-
-    /**
-     * Получение стрима
-     * @param operations список операций (сложение, вычитание), задания по которым должны быть сгенерированы
-     */
-    private FileInputStream getResultStream(List<OperationEnum> operations, Settings settings) throws IOException {
-        return service.getPlusMinusFile(operations, settings);
     }
 
     /**

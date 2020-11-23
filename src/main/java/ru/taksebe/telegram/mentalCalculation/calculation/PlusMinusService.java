@@ -4,7 +4,7 @@ import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import ru.taksebe.telegram.mentalCalculation.enums.OperationEnum;
-import ru.taksebe.telegram.mentalCalculation.fileProcessor.WordFileProcessor;
+import ru.taksebe.telegram.mentalCalculation.fileProcessor.WordFileProcessorImpl;
 import ru.taksebe.telegram.mentalCalculation.telegram.nonCommand.Settings;
 
 import java.io.FileInputStream;
@@ -19,7 +19,7 @@ import java.util.List;
 @FieldDefaults(makeFinal = true, level = AccessLevel.PRIVATE)
 @AllArgsConstructor
 public class PlusMinusService {
-    WordFileProcessor fileProcessor;
+    WordFileProcessorImpl fileProcessor;
     Calculator calculator;
 
     /**
