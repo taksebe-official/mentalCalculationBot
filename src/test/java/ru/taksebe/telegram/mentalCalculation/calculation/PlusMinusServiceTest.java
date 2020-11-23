@@ -9,7 +9,7 @@ import org.slf4j.LoggerFactory;
 import ru.taksebe.telegram.mentalCalculation.enums.OperationEnum;
 import ru.taksebe.telegram.mentalCalculation.exceptions.IllegalSettingsException;
 import ru.taksebe.telegram.mentalCalculation.fileProcessor.WordFileProcessorImpl;
-import ru.taksebe.telegram.mentalCalculation.telegram.Settings;
+import ru.taksebe.telegram.mentalCalculation.telegram.nonCommand.Settings;
 
 import java.io.IOException;
 import java.util.ArrayList;

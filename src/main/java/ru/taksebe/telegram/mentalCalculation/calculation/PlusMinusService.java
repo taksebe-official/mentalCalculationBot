@@ -5,7 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import ru.taksebe.telegram.mentalCalculation.enums.OperationEnum;
 import ru.taksebe.telegram.mentalCalculation.fileProcessor.WordFileProcessor;
-import ru.taksebe.telegram.mentalCalculation.telegram.Settings;
+import ru.taksebe.telegram.mentalCalculation.telegram.nonCommand.Settings;
 
 import java.io.FileInputStream;
 import java.io.IOException;
