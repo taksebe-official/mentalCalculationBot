@@ -21,7 +21,7 @@ public class SettingsCommand extends ServiceCommand {
     public void execute(AbsSender absSender, User user, Chat chat, String[] strings) {
         String userName = (user.getUserName() != null) ? user.getUserName() :
                 String.format("%s %s", user.getLastName(), user.getFirstName());
-        logger.info(String.format("Пользователь %s. Начато выполнение команды %s", userName,
+        logger.debug(String.format("Пользователь %s. Начато выполнение команды %s", userName,
                 this.getCommandIdentifier()));
 
         Long chatId = chat.getId();
@@ -36,7 +36,7 @@ public class SettingsCommand extends ServiceCommand {
                                 "\uD83D\uDC49 Например, 3,15,6 или 4 17 3",
                         settings.getMin(), settings.getMax(), settings.getListCount()));
 
-        logger.info(String.format("Пользователь %s. Завершено выполнение команды %s", userName,
+        logger.debug(String.format("Пользователь %s. Завершено выполнение команды %s", userName,
                 this.getCommandIdentifier()));
     }
 }

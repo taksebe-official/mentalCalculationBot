@@ -21,11 +21,11 @@ public class StartCommand extends ServiceCommand {
         String userName = (user.getUserName() != null) ? user.getUserName() :
                 String.format("%s %s", user.getLastName(), user.getFirstName());
 
-        logger.info(String.format("Пользователь %s. Начато выполнение команды %s", userName,
+        logger.debug(String.format("Пользователь %s. Начато выполнение команды %s", userName,
                 this.getCommandIdentifier()));
         sendAnswer(absSender, chat.getId(), this.getCommandIdentifier(), userName,
                 "Давайте начнём! Если Вам нужна помощь, нажмите /help");
-        logger.info(String.format("Пользователь %s. Завершено выполнение команды %s", userName,
+        logger.debug(String.format("Пользователь %s. Завершено выполнение команды %s", userName,
                 this.getCommandIdentifier()));
     }
 }

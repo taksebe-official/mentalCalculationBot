@@ -24,11 +24,11 @@ public class PlusCommand extends OperationCommand {
         String userName = (user.getUserName() != null) ? user.getUserName() :
                 String.format("%s %s", user.getLastName(), user.getFirstName());
 
-        logger.info(String.format("Пользователь %s. Начато выполнение команды %s", userName,
+        logger.debug(String.format("Пользователь %s. Начато выполнение команды %s", userName,
                 this.getCommandIdentifier()));
         sendAnswer(absSender, chat.getId(), Collections.singletonList(OperationEnum.ADDITION), this.getDescription(),
                 this.getCommandIdentifier(), userName);
-        logger.info(String.format("Пользователь %s. Завершено выполнение команды %s", userName,
+        logger.debug(String.format("Пользователь %s. Завершено выполнение команды %s", userName,
                 this.getCommandIdentifier()));
     }
 }

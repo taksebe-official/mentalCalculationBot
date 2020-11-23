@@ -21,7 +21,7 @@ public class HelpCommand extends ServiceCommand {
         String userName = (user.getUserName() != null) ? user.getUserName() :
                 String.format("%s %s", user.getLastName(), user.getFirstName());
 
-        logger.info(String.format("Пользователь %s. Начато выполнение команды %s", userName,
+        logger.debug(String.format("Пользователь %s. Начато выполнение команды %s", userName,
                 this.getCommandIdentifier()));
         sendAnswer(absSender, chat.getId(), this.getCommandIdentifier(), userName,
                 "Я бот, который поможет Вашим детям быстро научиться считать в уме\n\n" +
@@ -35,7 +35,7 @@ public class HelpCommand extends ServiceCommand {
                         "для использования в заданиях, максимальное число и количество страниц в файле (не более 10)\n" +
                         "\uD83D\uDC49 Например, 3,15,6 или 4 17 3\n\n" +
                         "Желаю удачи\uD83D\uDE42");
-        logger.info(String.format("Пользователь %s. Завершено выполнение команды %s", userName,
+        logger.debug(String.format("Пользователь %s. Завершено выполнение команды %s", userName,
                 this.getCommandIdentifier()));
     }
 }

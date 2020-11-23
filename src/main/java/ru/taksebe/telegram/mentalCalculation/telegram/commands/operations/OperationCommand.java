@@ -38,11 +38,11 @@ abstract class OperationCommand extends BotCommand {
         try {
             absSender.execute(createDocument(chatId, operations, description));
         } catch (IOException | IllegalArgumentException e) {
-            logger.error(String.format("Ошибка %s. Команда %s Пользователь: %s", e.getMessage(), commandName, userName));
+            logger.error(String.format("Ошибка %s. Команда %s. Пользователь: %s", e.getMessage(), commandName, userName));
             sendError(absSender, chatId, commandName, userName);
             e.printStackTrace();
         } catch (TelegramApiException e) {
-            logger.error(String.format("Ошибка %s. Команда %s Пользователь: %s", e.getMessage(), commandName, userName));
+            logger.error(String.format("Ошибка %s. Команда %s. Пользователь: %s", e.getMessage(), commandName, userName));
             e.printStackTrace();
         }
     }
@@ -76,7 +76,7 @@ abstract class OperationCommand extends BotCommand {
         try {
             absSender.execute(new SendMessage(chatId.toString(), "Похоже, я сломался. Попробуйте позже"));
         } catch (TelegramApiException e) {
-            logger.error(String.format("Ошибка %s. Команда %s Пользователь: %s", e.getMessage(), commandName, userName));
+            logger.error(String.format("Ошибка %s. Команда %s. Пользователь: %s", e.getMessage(), commandName, userName));
             e.printStackTrace();
         }
     }

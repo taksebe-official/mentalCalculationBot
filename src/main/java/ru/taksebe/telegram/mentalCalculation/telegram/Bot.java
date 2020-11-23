@@ -37,22 +37,22 @@ public final class Bot extends TelegramLongPollingCommandBot {
 
     public Bot(String botName, String botToken) {
         super();
-        logger.info("Конструктор суперкласса отработал");
+        logger.debug("Конструктор суперкласса отработал");
         this.BOT_NAME = botName;
         this.BOT_TOKEN = botToken;
-        logger.info("Имя и токен присвоены");
+        logger.debug("Имя и токен присвоены");
         register(new StartCommand("start", "Старт"));
-        logger.info("Команда start создана");
+        logger.debug("Команда start создана");
         register(new PlusCommand("plus", "Сложение"));
-        logger.info("Команда plus создана");
+        logger.debug("Команда plus создана");
         register(new MinusCommand("minus", "Вычитание"));
-        logger.info("Команда minus создана");
+        logger.debug("Команда minus создана");
         register(new PlusMinusCommand("plusminus", "Сложение и вычитание"));
-        logger.info("Команда plusminus создана");
+        logger.debug("Команда plusminus создана");
         register(new HelpCommand("help","Помощь"));
-        logger.info("Команда help создана");
+        logger.debug("Команда help создана");
         register(new SettingsCommand("settings", "Мои настройки"));
-        logger.info("Команда settings создана");
+        logger.debug("Команда settings создана");
         userSettings = new HashMap<>();
         logger.info("Бот создан!");
     }
@@ -79,29 +79,29 @@ public final class Bot extends TelegramLongPollingCommandBot {
         String userLogName = (userName != null) ? userName :
                 String.format("%s %s", user.getLastName(), user.getFirstName());
         String text = msg.getText();
-        logger.info(String.format("Пользователь %s. Начата обработка сообщения \"%s\", не являющегося командой",
+        logger.debug(String.format("Пользователь %s. Начата обработка сообщения \"%s\", не являющегося командой",
                 userLogName, text));
 
         Settings settings;
         try {
-            logger.info(String.format("Пользователь %s. Пробуем создать объект настроек из сообщения \"%s\"",
+            logger.debug(String.format("Пользователь %s. Пробуем создать объект настроек из сообщения \"%s\"",
                     userLogName, text));
             settings = Settings.createSettings(text);
             saveUserSettings(chatId, settings);
-            logger.info(String.format("Пользователь %s. Объект настроек из сообщения \"%s\" создан и сохранён",
+            logger.debug(String.format("Пользователь %s. Объект настроек из сообщения \"%s\" создан и сохранён",
                     userLogName, text));
-            setAnswer(chatId, "Настройки обновлены. Вы всегда можете их посмотреть с помощью /settings");
+            setAnswer(chatId, userLogName, "Настройки обновлены. Вы всегда можете их посмотреть с помощью /settings");
         } catch (IllegalSettingsException e) {
-            logger.error(String.format("Пользователь %s. Не удалось создать объект настроек из сообщения \"%s\". " +
+            logger.debug(String.format("Пользователь %s. Не удалось создать объект настроек из сообщения \"%s\". " +
                             "%s", userLogName, text, e.getMessage()));
-            setAnswer(chatId, e.getMessage() +
+            setAnswer(chatId, userLogName, e.getMessage() +
                     "\n\n❗ Настройки не были изменены. Вы всегда можете их посмотреть с помощью /settings");
         } catch (IllegalArgumentException e) {
-            logger.error(String.format("Пользователь %s. Не удалось создать объект настроек из сообщения \"%s\". " +
+            logger.debug(String.format("Пользователь %s. Не удалось создать объект настроек из сообщения \"%s\". " +
                     "%s. %s", userLogName, text, e.getClass().getSimpleName(), e.getMessage()));
-            setAnswer(chatId, "Простите, я не понимаю Вас. Возможно, Вам поможет /help");
+            setAnswer(chatId, userLogName, "Простите, я не понимаю Вас. Возможно, Вам поможет /help");
         } finally {
-            logger.info(String.format("Пользователь %s. Завершена обработка сообщения \"%s\", не являющегося командой",
+            logger.debug(String.format("Пользователь %s. Завершена обработка сообщения \"%s\", не являющегося командой",
                     userLogName, text));
         }
     }
@@ -121,22 +121,25 @@ public final class Bot extends TelegramLongPollingCommandBot {
     /**
      * Отправка ответа
      * @param chatId id чата
+     * @param userName имя пользователя
      * @param text текст ответа
      */
-    private void setAnswer(Long chatId, String text) {
+    private void setAnswer(Long chatId, String userName, String text) {
         SendMessage answer = new SendMessage();
         answer.setText(text);
         answer.setChatId(chatId.toString());
-        replyToUser(answer);
+        replyToUser(answer, userName);
     }
 
     /**
      * Отправка ответа пользователю
      */
-    private void replyToUser(SendMessage message) {
+    private void replyToUser(SendMessage message, String userName) {
         try {
             execute(message);
         } catch (TelegramApiException e) {
+            logger.error(String.format("Ошибка %s. Сообщение, не являющееся командой. Пользователь: %s", e.getMessage(),
+                    userName));
             e.printStackTrace();
         }
     }

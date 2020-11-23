@@ -28,7 +28,7 @@ abstract class ServiceCommand extends BotCommand {
         try {
             absSender.execute(message);
         } catch (TelegramApiException e) {
-            logger.error(String.format("Ошибка %s. Команда %s Пользователь: %s", e.getMessage(), commandName, userName));
+            logger.error(String.format("Ошибка %s. Команда %s. Пользователь: %s", e.getMessage(), commandName, userName));
             e.printStackTrace();
         }
     }
