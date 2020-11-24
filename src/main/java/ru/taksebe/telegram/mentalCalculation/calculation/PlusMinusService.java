@@ -1,8 +1,6 @@
 package ru.taksebe.telegram.mentalCalculation.calculation;
 
-import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
-import lombok.experimental.FieldDefaults;
 import ru.taksebe.telegram.mentalCalculation.enums.OperationEnum;
 import ru.taksebe.telegram.mentalCalculation.fileProcessor.WordFileProcessorImpl;
 import ru.taksebe.telegram.mentalCalculation.telegram.nonCommand.Settings;
@@ -16,11 +14,10 @@ import java.util.List;
 /**
  * Сервис генерации заданий на сложение и/или вычитание
  */
-@FieldDefaults(makeFinal = true, level = AccessLevel.PRIVATE)
 @AllArgsConstructor
 public class PlusMinusService {
-    WordFileProcessorImpl fileProcessor;
-    Calculator calculator;
+    private final WordFileProcessorImpl fileProcessor;
+    private final Calculator calculator;
 
     /**
      * Формирование файла с заданиями на сложение и/или вычитание
