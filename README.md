@@ -70,8 +70,9 @@ java -Xmx300m -Xss512k -XX:CICompilerCount=2 -Dfile.encoding=UTF-8 -cp ./target/
 
 ## Порядок развёртывания на heroku
 
-Проект писался для релиза на [heroku](https://www.heroku.com/) и содержит файл Procfile, специфический именно для этой площадки
-
+Проект писался для релиза на [heroku](https://www.heroku.com/) и содержит специфические для этой площадки файлы:
++ Procfile, в котором устанавливается тип процесса (worker, web  и т.п.) и команда для запуска приложения
++ system.properties, в котором нужно указать версию Java, если она отлична от 8
 ```
 mvn clean install
 
