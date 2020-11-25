@@ -47,6 +47,7 @@ public class NonCommand {
      * @throws IllegalArgumentException пробрасывается, если сообщение пользователя не соответствует формату
      */
     private Settings createSettings(String text) throws IllegalArgumentException {
+        //отсекаем файлы, стикеры, гифки и прочий мусор
         if (text == null) {
             throw new IllegalArgumentException("Сообщение не является текстом");
         }
@@ -82,8 +83,10 @@ public class NonCommand {
      * @param settings настройки
      */
     private void saveUserSettings(Long chatId, Settings settings) {
-        if (!settings.equals(Settings.getDefaultSettings())) {
+        if (!settings.equals(Bot.getDefaultSettings())) {
             Bot.getUserSettings().put(chatId, settings);
+        } else {
+            Bot.getUserSettings().remove(chatId);
         }
     }
 }

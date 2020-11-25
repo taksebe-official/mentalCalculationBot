@@ -30,6 +30,8 @@ public final class Bot extends TelegramLongPollingCommandBot {
     private final String BOT_NAME;
     private final String BOT_TOKEN;
 
+    @Getter
+    private static final Settings defaultSettings = new Settings(1, 15,1);
     private final NonCommand nonCommand;
 
     /**
@@ -93,7 +95,7 @@ public final class Bot extends TelegramLongPollingCommandBot {
         Map<Long, Settings> userSettings = Bot.getUserSettings();
         Settings settings = userSettings.get(chatId);
         if (settings == null) {
-            return Settings.getDefaultSettings();
+            return defaultSettings;
         }
         return settings;
     }
@@ -106,7 +108,6 @@ public final class Bot extends TelegramLongPollingCommandBot {
         User user = msg.getFrom();
         String userName = user.getUserName();
         return (userName != null) ? userName : String.format("%s %s", user.getLastName(), user.getFirstName());
-
     }
 
     /**

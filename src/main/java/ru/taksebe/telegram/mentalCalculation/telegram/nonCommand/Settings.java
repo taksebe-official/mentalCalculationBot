@@ -1,11 +1,13 @@
 package ru.taksebe.telegram.mentalCalculation.telegram.nonCommand;
 
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 
 /**
  * Пользовательские настройки
  */
 @Getter
+@EqualsAndHashCode
 public class Settings {
 
     /**
@@ -26,6 +28,7 @@ public class Settings {
     /**
      * Количество уникальных задач, которыне можно сформировать с использованием интервала чисел от min до max
      */
+    @EqualsAndHashCode.Exclude
     private int uniqueTaskCount;
 
     public Settings(int min, int max, int listCount) {
@@ -33,12 +36,5 @@ public class Settings {
         this.max = SettingsAssistant.calculateMax(min, max);
         this.listCount = SettingsAssistant.calculateListCount(listCount);
         this.uniqueTaskCount = SettingsAssistant.calculateUniqueTaskCount(this.min, this.max);
-    }
-
-    /**
-     * Получение настроек по умолчанию
-     */
-    public static Settings getDefaultSettings() {
-        return new Settings(1, 15, 1);
     }
 }
