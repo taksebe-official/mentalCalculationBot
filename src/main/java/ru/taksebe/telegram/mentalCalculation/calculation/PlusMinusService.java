@@ -32,6 +32,12 @@ public class PlusMinusService {
         for (int i = 1; i <= settings.getListCount(); i++) {
             taskList.addAll(getTaskList(operations, settings));
         }
+        if (taskList.isEmpty()) {
+            throw new IllegalArgumentException(String.format("По непонятным причинам по заданным настройкам " +
+                    "(min = %s, max = %s, listCount = %s, uniqueTaskCount =%s) не удалось создать ни одной строки " +
+                    "с задачами", settings.getMin(), settings.getMax(), settings.getListCount(),
+                    settings.getUniqueTaskCount()));
+        }
         return fileProcessor.createWordFile(taskList);
     }
 

@@ -37,7 +37,7 @@ abstract class OperationCommand extends BotCommand {
                     String commandName, String userName) {
         try {
             absSender.execute(createDocument(chatId, operations, description));
-        } catch (IOException | IllegalArgumentException e) {
+        } catch (IOException | RuntimeException e) {
             logger.error(String.format("Ошибка %s. Команда %s. Пользователь: %s", e.getMessage(), commandName, userName));
             sendError(absSender, chatId, commandName, userName);
             e.printStackTrace();
