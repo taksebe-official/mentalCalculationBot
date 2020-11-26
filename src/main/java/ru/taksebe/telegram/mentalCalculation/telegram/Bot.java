@@ -7,8 +7,8 @@ import org.telegram.telegrambots.extensions.bots.commandbot.TelegramLongPollingC
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.Message;
 import org.telegram.telegrambots.meta.api.objects.Update;
-import org.telegram.telegrambots.meta.api.objects.User;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
+import ru.taksebe.telegram.mentalCalculation.Utils;
 import ru.taksebe.telegram.mentalCalculation.telegram.commands.operations.MinusCommand;
 import ru.taksebe.telegram.mentalCalculation.telegram.commands.operations.PlusCommand;
 import ru.taksebe.telegram.mentalCalculation.telegram.commands.operations.PlusMinusCommand;
@@ -81,7 +81,7 @@ public final class Bot extends TelegramLongPollingCommandBot {
     public void processNonCommandUpdate(Update update) {
         Message msg = update.getMessage();
         Long chatId = msg.getChatId();
-        String userName = getUserName(msg);
+        String userName = Utils.getUserName(msg);
 
         String answer = nonCommand.nonCommandExecute(chatId, userName, msg.getText());
         setAnswer(chatId, userName, answer);
@@ -98,16 +98,6 @@ public final class Bot extends TelegramLongPollingCommandBot {
             return defaultSettings;
         }
         return settings;
-    }
-
-    /**
-     * Формирование имени пользователя
-     * @param msg сообщение
-     */
-    private String getUserName(Message msg) {
-        User user = msg.getFrom();
-        String userName = user.getUserName();
-        return (userName != null) ? userName : String.format("%s %s", user.getLastName(), user.getFirstName());
     }
 
     /**
