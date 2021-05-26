@@ -1,7 +1,5 @@
 package ru.taksebe.telegram.mentalCalculation.telegram.nonCommand;
 
-import ru.taksebe.telegram.mentalCalculation.exceptions.IllegalSettingsException;
-
 /**
  * Валидации и расчёты настроек
  */
@@ -51,10 +49,6 @@ class SettingsAssistant {
         if (uniqueTaskCount < 0) {
             throw new IllegalArgumentException(String.format("Заданные значения %s - %s слишком велики. " +
                     "Число уникальных задач не влезает в Integer", min, max));
-        }
-        if (uniqueTaskCount == 0) {
-            throw new IllegalSettingsException(String.format("\uD83D\uDCA9 Для пары чисел %s - %s не существует" +
-                            " сложений и вычитаний, результат которых попадает в интервал между ними", min, max));
         }
         return uniqueTaskCount;
     }

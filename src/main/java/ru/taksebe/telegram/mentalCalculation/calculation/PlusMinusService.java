@@ -26,15 +26,19 @@ public class PlusMinusService {
      */
     public FileInputStream getPlusMinusFile(List<OperationEnum> operations, Settings settings)
             throws IOException {
+        //замена минимального значения на 1 в случае, если пользователем заданы значения, для которых невозможно
+        //сформировать ни одного задания
+        if (settings.getUniqueTaskCount() == 0) {
+            settings = new Settings(1, settings.getMax(), settings.getListCount());
+        }
+
         List<String> taskList = new ArrayList<>();
-        //количество страниц итогового документа. Если будет потребность пользователей, можно перенести в параметры,
-        // определяемые пользователем
         for (int i = 1; i <= settings.getListCount(); i++) {
             taskList.addAll(getTaskList(operations, settings));
         }
         if (taskList.isEmpty()) {
             throw new IllegalArgumentException(String.format("По непонятным причинам по заданным настройкам " +
-                    "(min = %s, max = %s, listCount = %s, uniqueTaskCount =%s) не удалось создать ни одной строки " +
+                    "(min = %s, max = %s, listCount = %s, uniqueTaskCount = %s) не удалось создать ни одной строки " +
                     "с задачами", settings.getMin(), settings.getMax(), settings.getListCount(),
                     settings.getUniqueTaskCount()));
         }

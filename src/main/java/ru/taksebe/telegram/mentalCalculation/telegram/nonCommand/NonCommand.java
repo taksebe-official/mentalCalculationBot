@@ -24,7 +24,8 @@ public class NonCommand {
             saveUserSettings(chatId, settings);
             logger.debug(String.format("Пользователь %s. Объект настроек из сообщения \"%s\" создан и сохранён",
                     userName, text));
-            answer = "Настройки обновлены. Вы всегда можете их посмотреть с помощью /settings";
+            answer = String.format("Настройки обновлены. Вы всегда можете их посмотреть с помощью /settings%s",
+                    createSettingWarning(settings));
         } catch (IllegalSettingsException e) {
             logger.debug(String.format("Пользователь %s. Не удалось создать объект настроек из сообщения \"%s\". " +
                     "%s", userName, text, e.getMessage()));
@@ -39,7 +40,7 @@ public class NonCommand {
         }
 
         logger.debug(String.format("Пользователь %s. Завершена обработка сообщения \"%s\", не являющегося командой",
-                    userName, text));
+                userName, text));
         return answer;
     }
 
@@ -81,7 +82,7 @@ public class NonCommand {
     /**
      * Добавление настроек пользователя в мапу, чтобы потом их использовать для этого пользователя при генерации файла
      * Если настройки совпадают с дефолтными, они не сохраняются, чтобы впустую не раздувать мапу
-     * @param chatId id чата
+     * @param chatId   id чата
      * @param settings настройки
      */
     private void saveUserSettings(Long chatId, Settings settings) {
@@ -90,5 +91,16 @@ public class NonCommand {
         } else {
             Bot.getUserSettings().remove(chatId);
         }
+    }
+
+    /**
+     * Формирование оповещения о некорректных настройках
+     */
+    private String createSettingWarning(Settings settings) {
+        return (settings.getUniqueTaskCount() == 0) ?
+                String.format("\r\n\r\n\uD83D\uDCA9 Для пары чисел %s - %s не существует сложений и вычитаний, " +
+                        "результат которых попадает в интервал между ними, поэтому вместо минимального значения при " +
+                        "формировании заданий будет использовано число 1", settings.getMin(), settings.getMax()) :
+                "";
     }
 }
