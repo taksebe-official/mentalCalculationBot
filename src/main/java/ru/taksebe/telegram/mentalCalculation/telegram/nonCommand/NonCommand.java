@@ -75,7 +75,12 @@ public class NonCommand {
      */
     private void validateSettings(int min, int max, int listCount) {
         if (min == 0 || max == 0 || listCount == 0) {
-            throw new IllegalSettingsException("\uD83D\uDCA9 Ни один из параметров не может равняться 0");
+            throw new IllegalSettingsException("\uD83D\uDCA9 Ни один из параметров не может равняться 0. Поражён " +
+                    "Вашей неудачей");
+        }
+        if (min > 10000 || max > 10000) {
+            throw new IllegalSettingsException("\uD83D\uDCA9 Заданные значения слишком велики. Не забывайте, мы учим " +
+                    "детей устному счёту, а не рассчитываем траекторию полёта к Юпитеру");
         }
     }
 

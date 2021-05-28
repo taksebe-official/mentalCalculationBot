@@ -26,17 +26,10 @@ class SettingsAssistant {
      * минимальное число, они меняются местами
      */
     static int calculateMax(int min, int max) {
-        int realMax;
-        if (max > min) {
-            realMax = max;
-        } else {
-            realMax = min;
+        if (min < max) {
+            return max;
         }
-        if (realMax > 10000) {
-            throw new IllegalArgumentException(String.format("Заданные значения %s - %s слишком велики. Не забывайте," +
-                    " мы учим детей устному счёту, а не рассчитываем траекторию полёта к Юпитеру", min, max));
-        }
-        return realMax;
+        return min;
     }
 
     /**
