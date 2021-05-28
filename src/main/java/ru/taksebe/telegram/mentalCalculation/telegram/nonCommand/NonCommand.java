@@ -97,7 +97,7 @@ public class NonCommand {
      * Формирование оповещения о некорректных настройках
      */
     private String createSettingWarning(Settings settings) {
-        return (settings.getUniqueTaskCount() == 0) ?
+        return (settings.getPlusMinusUniqueTaskCount() == 0) ?
                 String.format("\r\n\r\n\uD83D\uDCA9 Для пары чисел %s - %s не существует сложений и вычитаний, " +
                         "результат которых попадает в интервал между ними, поэтому вместо минимального значения при " +
                         "формировании заданий будет использовано число 1", settings.getMin(), settings.getMax()) :

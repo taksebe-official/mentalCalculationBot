@@ -26,15 +26,32 @@ public class Settings {
     private int listCount;
 
     /**
-     * Количество уникальных задач, которыне можно сформировать с использованием интервала чисел от min до max
+     * Количество уникальных задач на сложение/вычитание, которыне можно сформировать с использованием интервала чисел
+     * от min до max
      */
     @EqualsAndHashCode.Exclude
-    private int uniqueTaskCount;
+    private int plusMinusUniqueTaskCount;
+
+    /**
+     * Количество уникальных задач на умножение, которыне можно сформировать с использованием интервала чисел
+     * от min до max
+     */
+    @EqualsAndHashCode.Exclude
+    private int multiplicationUniqueTaskCount;
+
+    /**
+     * Количество уникальных задач на деление, которыне можно сформировать с использованием интервала чисел
+     * от min до max
+     */
+    @EqualsAndHashCode.Exclude
+    private int divisionUniqueTaskCount;
 
     public Settings(int min, int max, int listCount) {
         this.min = SettingsAssistant.calculateMin(min, max);
         this.max = SettingsAssistant.calculateMax(min, max);
         this.listCount = SettingsAssistant.calculateListCount(listCount);
-        this.uniqueTaskCount = SettingsAssistant.calculateUniqueTaskCount(this.min, this.max);
+        this.plusMinusUniqueTaskCount = SettingsAssistant.calculatePlusMinusUniqueTaskCount(this.min, this.max);
+        this.multiplicationUniqueTaskCount = SettingsAssistant.calculateMultiplicationUniqueTaskCount(this.min, this.max);
+        this.divisionUniqueTaskCount = SettingsAssistant.calculateDivisionUniqueTaskCount(this.min, this.max);
     }
 }

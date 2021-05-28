@@ -1,26 +1,23 @@
 package ru.taksebe.telegram.mentalCalculation.calculation;
 
-import lombok.AccessLevel;
-import lombok.AllArgsConstructor;
-import lombok.experimental.FieldDefaults;
 import ru.taksebe.telegram.mentalCalculation.enums.OperationEnum;
 
 import java.util.HashSet;
+import java.util.Random;
 import java.util.Set;
 
 /**
  * Формирование перечня уникальных заданий
  */
-@FieldDefaults(level = AccessLevel.PRIVATE)
-@AllArgsConstructor
 public class Calculator {
+    private final Random random = new Random();
 
     /**
      * Формирования перечня уникальных заданий для 1 страницы итогового документа
      * @param operation операция (например, сложение)
-     * @param min минимальное значение, которое должно использоваться в заданиях
-     * @param max максимально значение, которое должно использоваться в заданиях
-     * @param count количество заданий
+     * @param min       минимальное значение, которое должно использоваться в заданиях
+     * @param max       максимально значение, которое должно использоваться в заданиях
+     * @param count     количество заданий
      */
     Set<String> getTaskSet(OperationEnum operation, int min, int max, int count) {
         Set<String> tasks = new HashSet<>();
@@ -31,19 +28,45 @@ public class Calculator {
     }
 
     /**
-     * Формирование задания, его проверка на попадание в заданные интервал и добавление в перечень
-     * @param tasks список заданий
+     * Формирование задания, его проверка на попадание в заданный интервал и добавление в перечень
+     * @param tasks     список заданий
      * @param operation операция (например, сложение)
-     * @param min минимальное значение, которое должно использоваться в заданиях
-     * @param max максимально значение, которое должно использоваться в заданиях
+     * @param min       минимальное значение, которое должно использоваться в заданиях
+     * @param max       максимально значение, которое должно использоваться в заданиях
      */
     private void addTaskToSet(Set<String> tasks, OperationEnum operation, int min, int max) {
-        int first = getRandomIntBetweenRange(min, max);
-        int second = getRandomIntBetweenRange(min, max);
+        int first;
+        int second;
 
-        int result = calculate(operation, first, second);
-        if (result >= min && result <= max) {
-            tasks.add(generateTask(operation, first, second));
+        switch (operation) {
+            case MULTIPLICATION:
+                first = getRandomIntBetweenRange(min, max);
+                second = getRandomIntBetweenRange(2, (max <= 10) ? 10 : max);
+                tasks.add(getMultiplicationTask(first, second));
+                break;
+            case DIVISION:
+                first = getRandomIntBetweenRange(min, max);
+                second = getRandomIntBetweenRange(2, (max <= 10) ? 10 : max);
+                int multiplicationResult = first * second;
+                tasks.add(String.format("%s : %s =", multiplicationResult, first));
+                break;
+            case SUBTRACTION:
+                first = getRandomIntBetweenRange(min, max);
+                second = getRandomIntBetweenRange(min, max);
+                int subtractionResult = first - second;
+                if (subtractionResult >= min && subtractionResult <= max) {
+                    tasks.add(String.format("%s - %s =", first, second));
+                }
+                break;
+            case ADDITION:
+            default:
+                first = getRandomIntBetweenRange(min, max);
+                second = getRandomIntBetweenRange(min, max);
+                int additionResult = first + second;
+                if (additionResult >= min && additionResult <= max) {
+                    tasks.add(String.format("%s + %s =", first, second));
+                }
+                break;
         }
     }
 
@@ -55,31 +78,11 @@ public class Calculator {
     }
 
     /**
-     * Расчёт результата
-     * @param operation операция (например, сложение)
-     * @param first первый аргумент
-     * @param second второй аргумент
+     * Формирование текста задания на умножения из 2 чисел
      */
-    private int calculate(OperationEnum operation, int first, int second) {
-        switch (operation) {
-            case SUBTRACTION:
-                return first - second;
-            case ADDITION:
-            default:
-                return first + second;
-        }
-    }
-
-    /**
-     * Формирование строки задания
-     */
-    private String generateTask(OperationEnum operation, int first, int second) {
-        switch (operation) {
-            case SUBTRACTION:
-                return String.format("%s - %s =", first, second);
-            case ADDITION:
-            default:
-                return String.format("%s + %s =", first, second);
-        }
+    private String getMultiplicationTask(int first, int second) {
+        return random.nextBoolean() ?
+                String.format("%s * %s =", first, second) :
+                String.format("%s * %s =", second, first);
     }
 }

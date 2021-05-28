@@ -8,8 +8,8 @@ import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.InputFile;
 import org.telegram.telegrambots.meta.bots.AbsSender;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
+import ru.taksebe.telegram.mentalCalculation.calculation.ArithmeticService;
 import ru.taksebe.telegram.mentalCalculation.calculation.Calculator;
-import ru.taksebe.telegram.mentalCalculation.calculation.PlusMinusService;
 import ru.taksebe.telegram.mentalCalculation.enums.OperationEnum;
 import ru.taksebe.telegram.mentalCalculation.fileProcessor.WordFileProcessorImpl;
 import ru.taksebe.telegram.mentalCalculation.telegram.Bot;
@@ -23,11 +23,11 @@ import java.util.List;
  */
 abstract class OperationCommand extends BotCommand {
     private Logger logger = LoggerFactory.getLogger(OperationCommand.class);
-    private PlusMinusService service;
+    private ArithmeticService service;
 
     OperationCommand(String identifier, String description) {
         super(identifier, description);
-        this.service = new PlusMinusService(new WordFileProcessorImpl(), new Calculator());
+        this.service = new ArithmeticService(new WordFileProcessorImpl(), new Calculator());
     }
 
     /**
@@ -54,7 +54,7 @@ abstract class OperationCommand extends BotCommand {
      * @param fileName имя, которое нужно присвоить файлу
      */
     private SendDocument createDocument(Long chatId, List<OperationEnum> operations, String fileName) throws IOException {
-        FileInputStream stream = service.getPlusMinusFile(operations, Bot.getUserSettings(chatId));
+        FileInputStream stream = service.getFile(operations, Bot.getUserSettings(chatId));
         SendDocument document = new SendDocument();
         document.setChatId(chatId.toString());
         document.setDocument(new InputFile(stream, String.format("%s.docx", fileName)));

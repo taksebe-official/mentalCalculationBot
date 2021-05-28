@@ -9,9 +9,7 @@ import org.telegram.telegrambots.meta.api.objects.Message;
 import org.telegram.telegrambots.meta.api.objects.Update;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 import ru.taksebe.telegram.mentalCalculation.Utils;
-import ru.taksebe.telegram.mentalCalculation.telegram.commands.operations.MinusCommand;
-import ru.taksebe.telegram.mentalCalculation.telegram.commands.operations.PlusCommand;
-import ru.taksebe.telegram.mentalCalculation.telegram.commands.operations.PlusMinusCommand;
+import ru.taksebe.telegram.mentalCalculation.telegram.commands.operations.*;
 import ru.taksebe.telegram.mentalCalculation.telegram.commands.service.HelpCommand;
 import ru.taksebe.telegram.mentalCalculation.telegram.commands.service.SettingsCommand;
 import ru.taksebe.telegram.mentalCalculation.telegram.commands.service.StartCommand;
@@ -46,20 +44,40 @@ public final class Bot extends TelegramLongPollingCommandBot {
         this.BOT_NAME = botName;
         this.BOT_TOKEN = botToken;
         logger.debug("Имя и токен присвоены");
+
         this.nonCommand = new NonCommand();
         logger.debug("Класс обработки сообщения, не являющегося командой, создан");
+
         register(new StartCommand("start", "Старт"));
         logger.debug("Команда start создана");
+
         register(new PlusCommand("plus", "Сложение"));
         logger.debug("Команда plus создана");
+
         register(new MinusCommand("minus", "Вычитание"));
         logger.debug("Команда minus создана");
+
         register(new PlusMinusCommand("plusminus", "Сложение и вычитание"));
         logger.debug("Команда plusminus создана");
+
+        register(new MultiplicationCommand("multiply", "Умножение"));
+        logger.debug("Команда multiply создана");
+
+        register(new DivisionCommand("divide", "Деление"));
+        logger.debug("Команда divide создана");
+
+        register(new MultiplicationDivisionCommand("multdivide", "Умножение и деление"));
+        logger.debug("Команда multdivide создана");
+
+        register(new AllCommand("all", "4 действия"));
+        logger.debug("Команда all создана");
+
         register(new HelpCommand("help","Помощь"));
         logger.debug("Команда help создана");
+
         register(new SettingsCommand("settings", "Мои настройки"));
         logger.debug("Команда settings создана");
+
         userSettings = new HashMap<>();
         logger.info("Бот создан!");
     }
