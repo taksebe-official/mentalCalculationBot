@@ -68,7 +68,7 @@ export BOT_TOKEN=<токен бота>
 java -Xmx300m -Xss512k -XX:CICompilerCount=2 -Dfile.encoding=UTF-8 -cp ./target/classes:./target/dependency/* ru.taksebe.telegram.mentalCalculation.MentalCalculationApplication
 ```
 
-## Порядок развёртывания на heroku
+## Порядок развёртывания на Heroku
 
 Проект писался для релиза на [heroku](https://www.heroku.com/) и содержит специфические для этой площадки файлы:
 + Procfile, в котором устанавливается тип процесса (worker, web  и т.п.) и команда для запуска приложения
@@ -76,7 +76,7 @@ java -Xmx300m -Xss512k -XX:CICompilerCount=2 -Dfile.encoding=UTF-8 -cp ./target/
 ```
 mvn clean install
 
-//предварительно зарегистрироваться на heroku
+//предварительно зарегистрироваться на Heroku
 heroku login
 heroku create <имя приложения>
 git push heroku master
@@ -93,7 +93,7 @@ heroku config:get BOT_TOKEN
 heroku ps:scale worker=1
 ```
 
-В интерфейсе управления приложением в личном кабинете на [heroku](https://www.heroku.com/) можно перейти к логам (прячутся под кнопкой «More» в правом верхнем углу) и убедиться, что приложение запущено. Также можно проверять бота непосредственно в Telegram
+В интерфейсе управления приложением в личном кабинете на [Heroku](https://www.heroku.com/) можно перейти к логам (прячутся под кнопкой «More» в правом верхнем углу) и убедиться, что приложение запущено. Также можно проверять бота непосредственно в Telegram
 
 При необходимости в интерфейсе управления приложением на вкладке «Deploy» можно переключить деплой на GitHub-репозиторий (по запросу или автоматически)
 
