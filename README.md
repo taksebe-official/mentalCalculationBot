@@ -6,6 +6,8 @@ Telegram-бот для генерации готового для печати W
 
 Бот принесёт пользу родителям, которые хотят подтянуть навыки устного счёта у своих детей
 
+[Статья на Хабре](https://habr.com/ru/post/528694/)
+
 ## Лицензия
 
 Этот проект лицензируется в соответствии с лицензией Apache 2.0
@@ -54,7 +56,6 @@ GitHub - репозиторий
 
 ```
 git clone https://github.com/taksebe-official/mentalCalculation
-cd mentalCalculation
 mvn clean install
 
 //далее для Windows
