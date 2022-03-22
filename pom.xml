@@ -18,7 +18,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <org.projectlombok.version>1.18.16</org.projectlombok.version>
         <apache.poi.version>4.1.2</apache.poi.version>
-        <telegram.version>5.0.1</telegram.version>
+        <telegram.version>5.5.0</telegram.version>
     </properties>
 
     <dependencies>
